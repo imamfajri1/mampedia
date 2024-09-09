@@ -122,7 +122,7 @@ Sebuah proyek Django sederhana Tugas Mata Kuliah Pemrograman Berbasis Platform o
 18. Melakukan deploy app ke situs _Adaptable_
 
 **Bagan Arsitektur Django**
-![](static/MVT.png)
+![](static/images/MVT.png)
 Terlihat bahwa _request_  dari user akan diproses terlebih dahulu sehingga dapat diteruskan ke View yang sesuai. kemudian View tersebut akan membaca/menulis data di Model dan menggunakan Template untuk menampilkan dan mengembalikan _response_ ke _user_
 
 **Fungsi git dalam pengembangan perangkat lunak**
