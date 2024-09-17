@@ -1,12 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>MamPedia Semua Ada</h1>
-<h4>NPM: 2306165566</h4>
-<h4>Name: Imam Fajri</h5>
-<h4>Class: PBP C</h4>
-<h5>Nama Pesanan</h5>
-<p>{{ name }}<p>
-<h6>Harga</h6>
-<p>{{ price }}<p>
-<h5>Jumlah Pesanan</h5>
-<p>{{ quantity }}<p>
-<h6>Deksripsi</h6>
-<p>{{ description }}<p>
+<h5>NPM: </h5>
+<p>{{ npm }}<p>
+
+<h5>Name:</h5>
+<p>{{ name }}</p>
+
+<h5>Class:</h5>
+<p>{{ class }}</p>
+
+{% if not atribut_entries %}
+<p>Belum ada data orderan pada MamPedia.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Order Name</th>
+    <th>Time</th>
+    <th>Price</th>
+    <th>Quantity</th>
+  </tr>
+
+  {% comment %} Berikut cara memperlihatkan data penjualan di bawah baris ini 
+  {% endcomment %} 
+  {% for order_entry in atribut_entries %}
+  <tr>
+    <td>{{order_entry.name}}</td>
+    <td>{{order_entry.time}}</td>
+    <td>{{order_entry.quantity}}</td>
+    <td>{{order_entry.price}}</td>
+    <td>{{order_entry.description}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_atribute_entry' %}">
+  <button>Add New Order Entry</button>
+</a>
+{% endblock content %}
