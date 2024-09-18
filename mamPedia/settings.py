@@ -123,4 +123,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","imam-fajri-mampedia.pbp.cs.ui.ac.id", "imam-fajri-mampedia.pbp.cs.ui.ac.id"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://pbp.cs.ui.ac.id/web/project/imam.fajri/mampedia", "https://pbp.cs.ui.ac.id/web/project/imam.fajri/mampedia"]
