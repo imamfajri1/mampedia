@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Include navbar -->
+{% include 'navbar.html' %}
+
+<div class="bg-white">
+  <div class="p-4 animate-shine">
+    <div class="relative isolate px-6 pt-14 lg:px-8">
+      <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+      </div>
+      <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+        <div class="text-center">
+          <!-- Typewriter Animation Target -->
+          <h1 id="typewriter" class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"></h1>
+          <p class="mt-6 text-lg leading-8 text-gray-600">Temukan laptop impianmu hanya di MamPedia. Kami menghadirkan berbagai pilihan laptop berkualitas untuk segala kebutuhan teknologi Anda. MamPedia, solusi cerdas untuk produktivitas maksimal.</p>
+          <div class="mt-10 flex items-center justify-center gap-x-6">
+            <!-- Button for login -->
+            <a href="{% url 'main:login' %}" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Log in</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript Typewriter Logic -->
+<script>
+  const words = ["Welcome To MamPedia", "Find Your Dream Laptop", "Smart Solutions for Productivity"];
+  let i = 0;
+  let j = 0;
+  let currentWord = "";
+  let isDeleting = false;
+  let isPaused = false;
+  
+  function type() {
+    currentWord = words[i];
+  
+    if (isPaused) {
+      setTimeout(type, 500); // Jeda lebih lama saat teks selesai atau sebelum penghapusan
+      isPaused = false; // Hapus status jeda setelah jeda selesai
+      return;
+    }
+  
+    if (isDeleting) {
+      document.getElementById("typewriter").textContent = currentWord.substring(0, j - 1);
+      j--;
+      if (j === 0) {
+        isDeleting = false;
+        i++;
+        if (i === words.length) {
+          i = 0;
+        }
+        isPaused = true; // Tambah jeda setelah teks terhapus
+      }
+    } else {
+      document.getElementById("typewriter").textContent = currentWord.substring(0, j + 1);
+      j++;
+      if (j === currentWord.length) {
+        isDeleting = true;
+        isPaused = true; // Tambah jeda setelah teks selesai diketik
+      }
+    }
+  
+    setTimeout(type, isDeleting ? 100 : 200); // Atur kecepatan mengetik dan menghapus
+  }
+  
+  type();
+  </script>
+  
+
+{% endblock content %}

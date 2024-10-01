@@ -1,0 +1,32 @@
+<div class="relative bg-gradient-to-r from-gray-800 to-black rounded-xl overflow-hidden">
+    <!-- Shine effect -->
+    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 animate-shine"></div>
+
+    <!-- Content -->
+    <div class="relative p-4">
+      <h5 class="text-lg font-semibold text-gray-200">{{ title }}</h5>
+      <p class="text-white">{{ value }}</p>
+    </div>
+</div>
+
+<style>
+  /* Keyframes for the shine animation */
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  /* Animasi untuk shine */
+  .animate-shine {
+    animation: shine 2s infinite;
+  }
+</style>
