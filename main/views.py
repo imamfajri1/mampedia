@@ -10,20 +10,41 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
 
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    atribut_entries = AtributEntery.objects.filter(user=request.user)
     context = {
         'npm' : '2306165566',
         'name': request.user.username,
         'class': 'PBP C',
-        'atribut_entries': atribut_entries,
         'last_login': request.COOKIES['last_login'],
     }
 
     return render(request, "main.html", context)
+
+@csrf_exempt
+@require_POST
+def add_atribute_entry_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    image_url = request.POST.get("image_url")
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))
+    quantity = request.POST.get("quantity")
+    user = request.user
+
+    new_product = AtributEntery(
+        name = name, image_url = image_url,
+        price = price, description = description,
+        quantity = quantity, 
+        user = user
+    )
+    new_product.save()
+    return HttpResponse(b"CREATED", status=201)
+    
 
 def create_atribute_entry(request):
     form = AtributEntryForm(request.POST or None)
@@ -38,11 +59,11 @@ def create_atribute_entry(request):
     return render(request, "create_atribute_entry.html", context)
 
 def show_xml(request):
-    data = AtributEntery.objects.all()
+    data = AtributEntery.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = AtributEntery.objects.all()
+    data = AtributEntery.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
